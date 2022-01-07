@@ -1,21 +1,50 @@
 # video-time-slider
 
-用于IVR视频回播的时间选择插件，刻度尺的实现参考了[vue语法css实现刻度尺](https://ext.dcloud.net.cn/plugin?id=4567)，为项目微信小程序制作。
+用于IVR视频回播的时间选择插件，刻度尺的实现参考了[vue语法css实现刻度尺](https://ext.dcloud.net.cn/plugin?id=4567)，为项目微信小程序制作。基于`uni-app`开发。
 
 其实这个可以做成前端通用组件的，因为本人项目只在微信小程序使用此插件，就先做成小程序版本了，其它平台没试过，但是估计都能用。
 
-和 [live-player](https://uniapp.dcloud.io/component/live-player) 配合适用，播放视频挺流畅的。
+和 [live-player](https://uniapp.dcloud.io/component/live-player) 配合使用，播放视频挺流畅的。
 
 ## 功能
 
 * 24小时刻度尺，30分钟分隔
 * 有录像的时间段在刻度尺上标识（支持多个时间段）
-* 回传刻度无录像时间段时间值、刻度有录像时间段时间值，用于接口获取播放视频
+* 回传刻度无录像时间段时间值、刻度有录像时间段时间值（用于接口获取播放视频）
+*  目前刻度尺返回值精确到秒
 * 自动回滚最后有录像时间段
 
 ## 效果图
 
-![](./Snip20211201_1.png)
+![](./Snip20220107_10.png)
+
+
+![](./Snip20220107_10.gif)
+
+## 有录像的时间段在刻度尺上标识（支持多个时间段）实现思路
+
+（纯粹记录下，怕自己忘记了）
+
+传参是以时间段的方式，每段录像的开始时间、结束时间为一组。以开始时间、结束时间在刻度尺上的位置，渲染一段带颜色的`view`，就能实现多个时间段在刻度尺上的标识。
+
+### 找到开始时间在刻度尺上的位置
+
+算法在`utils.js`文件的`dateToGrid`方法里。难点主要是24小时刻度尺上`px`长度和真实时间之间的转换。
+
+*  1、开始时间位置距开始时间（0点）距离，代号a
+*  2、时间段在刻度尺上的长度，代号b
+*  3、结束时间距离刻度0点的距离，代号c
+
+用`vue`渲染的时候，从第二段时间
+
+```
+<view class="scale-active">
+    <view class='scale-active-time' v-for="(it, idt) in newActiveTime" :key="idt" :style="{marginLeft: idt>0?newActiveTime[idt][0]-newActiveTime[idt-1][2] + 'px':newActiveTime[idt][0] + 'px'}">
+        <view class="scale-active-item" :style="{width: it[1] + 'px'}" />
+    </view>
+</view>
+```
+
 
 ## 使用
 
@@ -99,3 +128,4 @@ TypeError: Cannot read property 'forceUpdate' of undefined
 ```
 
 `manifest.json`文件配置下微信小程序的AppID就行了，不用在意
+

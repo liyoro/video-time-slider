@@ -90,3 +90,13 @@ style选项
 * 微信 App Android 最低版本要求：6.5.19。
 * 小程序基础库最低版本要求：1.7.0。
 
+
+## 注意
+
+如果微信开发者工具报以下错误
+
+```
+TypeError: Cannot read property 'forceUpdate' of undefined
+```
+
+`manifest.json`文件配置下微信小程序的AppID就行了，不用在意

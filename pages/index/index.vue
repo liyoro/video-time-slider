@@ -1,8 +1,8 @@
 <template>
 	<div class="content">
 		<div>
-			<view class='scale-value'>无录像时间段：{{curVal}}</view>
-			<view class='scale-value'>有录像时间段：{{curActiveVal}}</view>
+			<view class='scale-value'>无录像时间段时间：{{curVal}}</view>
+			<view class='scale-value'>有录像时间段时间：{{curActiveVal}}</view>
 			<view class='scale-view'>
 				<video-time-slider :curDate="2021-11-29"
 					:activeTime="[['01:12', '03:43'],['05:22', '07:33'],['12:02', '17:39']]" 
