@@ -1,6 +1,6 @@
 # video-time-slider
 
-用于IVR视频回播的时间选择插件，刻度尺的实现参考了[vue语法css实现刻度尺](https://ext.dcloud.net.cn/plugin?id=4567)，为项目微信小程序制作。基于`uni-app`开发。
+用于IVR视频回播的时间选择插件，刻度尺的实现参考了[vue语法css实现刻度尺](https://ext.dcloud.net.cn/plugin?id=4567)，为项目微信小程序制作。基于`uni-app`开发。目前没找到类似的插件，所以才动手实现了一个，是不是做视频的同行太少了。
 
 其实这个可以做成前端通用组件的，因为本人项目只在微信小程序使用此插件，就先做成小程序版本了，其它平台没试过，但是估计都能用。
 
@@ -181,4 +181,6 @@ TypeError: Cannot read property 'forceUpdate' of undefined
 
 ## 总结
 
-已上市场 [video-time-slider](https://ext.dcloud.net.cn/plugin?id=7142)
+已上插件市场 [video-time-slider](https://ext.dcloud.net.cn/plugin?id=7142)
+
+市场上的代码可能会忘记更新，具体看代码了，github上的代码是最新的 [video-time-slider](https://github.com/liyoro/video-time-slider)
