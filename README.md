@@ -179,3 +179,6 @@ TypeError: Cannot read property 'forceUpdate' of undefined
 
 `manifest.json`文件配置下微信小程序的AppID就行了，不用在意
 
+## 总结
+
+已上市场 [video-time-slider](https://ext.dcloud.net.cn/plugin?id=7142)
