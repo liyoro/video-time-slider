@@ -17,10 +17,10 @@
 					<!-- 标尺容器 -->
 					<view class='scale-container'>
 						<!-- 标尺数显示，长度：每格长度*个数 -->
-						<view class='scale-vaule-wrapper' :style="{width: single*5*grid + 'px', color: stylesObj.fontColor, fontSize: stylesObj.fontSize + 'px'}">
-							<view class='scale-value first-scale-value' :style="{width: single*5 + 'px'}">00:00</view>
+						<view class='scale-vaule-wrapper' :style="{width: single*grid + 'px', color: stylesObj.fontColor, fontSize: stylesObj.fontSize + 'px'}">
+							<view class='scale-value first-scale-value' :style="{width: single + 'px'}">00:00</view>
 							<view style="display: flex;">
-								<view class='scale-vaule' v-for="(it, index) in grid" :key="index" :style="{width: single*5 + 'px'}">
+								<view class='scale-vaule' v-for="(it, index) in grid" :key="index" :style="{width: single + 'px'}">
 									{{index%2==0?'':dateArr[index]}}
 								</view>
 							</view>
@@ -28,7 +28,7 @@
 						<!-- 刻度点 -->
 						<view class='scale-wrapper'>
 							<view class='scale-grip-item' v-for="(it, idx) in max" :key="idx"
-								:style="{width: single*5 + 'px', height: idx%2==0?'6px':'10px', borderColor: stylesObj.line}" />
+								:style="{width: single + 'px', height: idx%2==0?'6px':'10px', borderColor: stylesObj.line}" />
 						</view>
 						<!-- 时间分段 -->
 						<view class="scale-active">
@@ -72,8 +72,8 @@
 				min: 0,
 				// 最大值
 				max: 48,
-				// 每个格子的实际行度 （单位px ，相对默认值）
-				single: 5,
+				// 每个格子的实际行度 （单位px ，相对默认值），值太小会挤一起
+				single: 25,
 				defaultStyles: {
 					line: '#dbdbdb', // 刻度颜色
 					bginner: '#fbfbfb', // 前景色颜色
@@ -131,10 +131,10 @@
 					let t2 = dateToGrid(it2, this.max)
 					
 					// 初始位置距左边距离
-					let poi = t1 * 5 * this.single
+					let poi = t1 * this.single
 					
 					// 时间在刻度上长度
-					let len = (t2-t1).toFixed(2) * 5 * this.single
+					let len = (t2-t1).toFixed(2) * this.single
 					
 					// 可播放区域最右距离刻度0点的距离，用于>0位置在刻度上的位置定位
 					let left = poi + len
@@ -184,7 +184,7 @@
 				// 选中的值
 				let value
 				
-				value = this.min + ((offset / this.single) / 5)
+				value = this.min + (offset / this.single)
 				value = value.toFixed(2)
 				if (value > this.max) value = this.max
 				
@@ -221,7 +221,7 @@
 			goTo(value) {
 				let ct = dateToGrid(value, this.max)
 				
-				const diff = ct * 5
+				const diff = ct
 				const centerNum = diff * this.single
 				
 				// 限制刻度
